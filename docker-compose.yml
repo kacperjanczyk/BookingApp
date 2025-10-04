@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  # PHP-FPM dla Symfony
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container_name: booking_api_php
+    working_dir: /var/www/symfony
+    volumes:
+      - ./backend:/var/www/symfony
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    environment:
+      DATABASE_URL: mysql://booking_user:booking_pass@mysql:3306/booking_db?serverVersion=8.0
+      APP_ENV: dev
+      APP_SECRET: your_secret_key_change_in_production
+    depends_on:
+      - mysql
+    networks:
+      - booking_network
+
+  # Nginx
+  nginx:
+    image: nginx:alpine
+    container_name: booking_api_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/var/www/symfony
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - booking_network
+
+  # MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: booking_api_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: booking_db
+      MYSQL_USER: booking_user
+      MYSQL_PASSWORD: booking_pass
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - booking_network
+
+  # React Frontend
+  react:
+    build:
+      context: ./docker/react
+      dockerfile: Dockerfile
+    container_name: booking_api_react
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080/api
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
+    networks:
+      - booking_network
+
+  # phpMyAdmin (opcjonalnie, do zarządzania bazą danych)
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: booking_api_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: booking_user
+      PMA_PASSWORD: booking_pass
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    networks:
+      - booking_network
+
+networks:
+  booking_network:
+    driver: bridge
+
+volumes:
+  mysql_data:

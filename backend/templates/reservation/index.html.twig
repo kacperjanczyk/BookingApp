@@ -1,0 +1,68 @@
+{# templates/vacancy/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservations{% endblock %}
+
+{% block body %}
+    <div class="row mb-4">
+        <div class="col">
+            <h1>Reservations</h1>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Price</th>
+                        <th>Customer name</th>
+                        <th>Customer surname</th>
+                        <th>Customer email</th>
+                        <th>Customer phone</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.id }}</td>
+                            <td>{{ reservation.startDate|date('Y-m-d') }}</td>
+                            <td>{{ reservation.endDate|date('Y-m-d') }}</td>
+                            <td>{{ reservation.price }} USD</td>
+                            <td>{{ reservation.name }}</td>
+                            <td>{{ reservation.surname }}</td>
+                            <td>{{ reservation.email }}</td>
+                            <td>{{ reservation.phone }}</td>
+                            <td>
+                                <span class="badge
+                                    {% if reservation.status == 'Confirmed' %}bg-success
+                                    {% elseif reservation.status == 'Pending' %}bg-warning
+                                    {% else %}bg-secondary{% endif %}">
+                                    {{ reservation.status|capitalize }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ path('admin_reservations_confirm', {'id': reservation.id}) }}" class="btn btn-sm btn-success {% if reservation.status != 'Pending' %}disabled{% endif %}">
+                                    Confirm
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10" class="text-center text-muted">
+                                No reservations.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

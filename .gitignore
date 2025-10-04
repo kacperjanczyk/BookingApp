@@ -1,0 +1,8 @@
+.idea/
+# FRONTEND
+/frontend/node_modules/
+# BACKEND
+/backend/.env
+/backend/public/bundles/
+/backend/var/
+/backend/vendor/

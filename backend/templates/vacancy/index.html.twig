@@ -1,0 +1,66 @@
+{# templates/vacancy/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Vacancies{% endblock %}
+
+{% block body %}
+    <div class="row mb-4">
+        <div class="col">
+            <h1>Vacancies</h1>
+        </div>
+        <div class="col text-end">
+            <a href="{{ path('admin_vacancy_create') }}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add New
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Total Capacity</th>
+                        <th>Available Capacity</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for vacancy in vacancies %}
+                        <tr>
+                            <td>{{ vacancy.id }}</td>
+                            <td>{{ vacancy.date|date('Y-m-d') }}</td>
+                            <td>{{ vacancy.totalCount }}</td>
+                            <td>
+                            <span class="badge {% if vacancy.availableCount == 0 %}bg-danger{% elseif vacancy.availableCount < vacancy.totalCount %}bg-warning{% else %}bg-success{% endif %}">
+                                {{ vacancy.availableCount }}
+                            </span>
+                            </td>
+                            <td>{{ vacancy.price }} USD</td>
+                            <th>
+                                <a href="{{ path('admin_vacancy_edit', {'id': vacancy.id}) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <form method="post" action="{{ path('admin_vacancy_delete', {'id': vacancy.id}) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this vacancy?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ vacancy.id) }}">
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </th>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">
+                                No vacancies. <a href="{{ path('admin_vacancy_new') }}">Add New</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
