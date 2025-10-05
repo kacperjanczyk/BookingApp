@@ -60,9 +60,6 @@ docker exec -it booking_api_php composer install
 ```bash
 # Run migrations
 docker exec -it booking_api_php php bin/console doctrine:migrations:migrate --no-interaction
-
-# (Optional) Load test data
-docker exec -it booking_api_php php bin/console doctrine:fixtures:load --no-interaction
 ```
 
 ### 5. Verify the application is running
