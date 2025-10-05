@@ -24,7 +24,6 @@ Booking system with Symfony backend and React frontend.
 - PHP 8.2 + FPM
 - MySQL 8.0
 - Nginx
-- API Platform 4.2
 - Doctrine ORM
 
 ### Frontend (React)
