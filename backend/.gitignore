@@ -1,0 +1,10 @@
+.env
+.env.test
+public/bundles/
+var/
+vendor/
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+/.phpunit.result.cache
+###< phpunit/phpunit ###
