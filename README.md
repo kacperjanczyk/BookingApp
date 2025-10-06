@@ -153,12 +153,6 @@ docker exec -it booking_api_php composer test:unit
 docker exec -it booking_api_php composer test:functional
 ```
 
-### With code coverage
-
-```bash
-docker exec -it booking_api_php php vendor/bin/phpunit --coverage-html coverage
-```
-
 ## 👨‍💼 Admin Panel
 
 Admin panel available at: http://localhost:8080
