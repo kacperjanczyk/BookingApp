@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/reservations', name: 'admin_reservations_')]
+#[Route('/admin/reservations', name: 'admin_reservations_')]
 class ReservationController extends AbstractController
 {
     public function __construct(

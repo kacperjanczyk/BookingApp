@@ -141,19 +141,6 @@ npm run build
 ```
 Creates an optimized production build in the `build/` folder.
 
-**Run tests:**
-```bash
-cd frontend
-npm test
-```
-Launches the test runner in interactive watch mode.
-
-**Code linting:**
-```bash
-cd frontend
-npm run lint
-```
-
 ### Frontend Features
 
 - **Booking interface** - User-friendly form for making reservations
