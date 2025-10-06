@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "4d136ef7-e995-44ca-8f2e-0494091a4e33",
+		"name": "BookingApp API",
+		"description": "Complete API collection for BookingApp - Symfony backend with reservation system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49041246",
+		"_collection_link": "https://kacper-5bdf4d32-6304638.postman.co/workspace/Kacper-Janczyk's-Workspace~3948549f-e1f7-4c8f-8e35-03aa6d615a6d/collection/49041246-4d136ef7-e995-44ca-8f2e-0494091a4e33?action=share&source=collection_link&creator=49041246"
+	},
+	"item": [
+		{
+			"name": "Vacancies",
+			"item": [
+				{
+					"name": "Get All Vacancies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/vacancies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vacancies"
+							]
+						},
+						"description": "Get all available vacancies without any filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vacancies with Date Filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/vacancies?startDate={{start_date_timestamp}}&endDate={{end_date_timestamp}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{start_date_timestamp}}",
+									"description": "Unix timestamp for start date (e.g., 1735686000)"
+								},
+								{
+									"key": "endDate",
+									"value": "{{end_date_timestamp}}",
+									"description": "Unix timestamp for end date (e.g., 1735858800)"
+								}
+							]
+						},
+						"description": "Get vacancies filtered by date range using Unix timestamps"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing and retrieving vacancy information"
+		},
+		{
+			"name": "Reservations",
+			"item": [
+				{
+					"name": "Get All Reservations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/reservations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reservations"
+							]
+						},
+						"description": "Get all reservations from the system"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Reservation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startDate\": 1735686000,\n    \"endDate\": 1735858800,\n    \"name\": \"John\",\n    \"surname\": \"Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phoneNumber\": \"+48123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/reservations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reservations"
+							]
+						},
+						"description": "Create a new reservation with customer details and date range"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Reservation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/reservations/{{reservation_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"{{reservation_id}}"
+							]
+						},
+						"description": "Delete a reservation by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing reservations (CRUD operations)"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "reservation_id",
+			"value": "1"
+		},
+		{
+			"key": "vacancy_id",
+			"value": "1"
+		},
+		{
+			"key": "start_date_timestamp",
+			"value": "1735686000"
+		},
+		{
+			"key": "end_date_timestamp",
+			"value": "1735858800"
+		}
+	]
+}
