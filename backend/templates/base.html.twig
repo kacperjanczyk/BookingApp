@@ -25,6 +25,12 @@
                 </li>
             </ul>
         </div>
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="navbar-nav ms-auto">
+            <span class="navbar-text me-3">{{ app.user.email }}</span>
+            <a class="btn btn-outline-danger btn-sm align-content-center" href="{{ path('app_logout') }}">Logout</a>
+        </div>
+        {% endif %}
     </div>
 </nav>
 
