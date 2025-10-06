@@ -54,20 +54,48 @@ cd <project-directory>
 docker-compose up -d
 ```
 
-### 3. Install PHP dependencies
+### 3. Prepare environment variables
+
+Main configuration is in `backend/.env`:
+
+```env
+DATABASE_URL=mysql://booking_user:booking_pass@mysql:3306/booking_db?serverVersion=8.0
+APP_ENV=dev
+APP_SECRET=your_secret_key_change_in_production
+CORS_ALLOW_ORIGIN=^http://localhost:3000$
+```
+
+Test configuration is in `backend/.env.test`:
+
+```env
+KERNEL_CLASS='App\Kernel'
+APP_SECRET=your_secret_key_change_in_production
+SYMFONY_DEPRECATIONS_HELPER=999999
+APP_ENV=test
+DATABASE_URL="mysql://booking_user:booking_pass@mysql:3306/booking_db?serverVersion=8.0"
+
+```
+
+### 4. Install PHP dependencies
 
 ```bash
 docker exec -it booking_api_php composer install
 ```
 
-### 4. Configure the database
+### 5. Configure the database
 
 ```bash
 # Run migrations
 docker exec -it booking_api_php php bin/console doctrine:migrations:migrate --no-interaction
 ```
 
-### 5. Install and start frontend
+### 6. Create admin user
+
+```bash
+docker exec -it booking_api_php php bin/console app:create-user
+```
+
+### 7. Install and start frontend
 
 ```bash
 cd frontend
@@ -75,7 +103,7 @@ npm install
 npm start
 ```
 
-### 6. Verify the application is running
+### 8. Verify the application is running
 
 Backend: http://localhost:8080
 - API: http://localhost:8080/api
@@ -88,17 +116,6 @@ phpMyAdmin: http://localhost:8081
 - Password: `booking_pass`
 
 ## ⚙️ Configuration
-
-### Environment Variables
-
-Main configuration is in `backend/.env`:
-
-```env
-DATABASE_URL=mysql://booking_user:booking_pass@mysql:3306/booking_db?serverVersion=8.0
-APP_ENV=dev
-APP_SECRET=your_secret_key_change_in_production
-CORS_ALLOW_ORIGIN=^http://localhost:3000$
-```
 
 ### Database Configuration
 
