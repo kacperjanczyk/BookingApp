@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/api/reservations', name: 'api_reservation_')]
-class ReservationApiController extends AbstractController
+final class ReservationApiController extends AbstractController
 {
     public function __construct(
         private readonly ReservationService     $reservationService,

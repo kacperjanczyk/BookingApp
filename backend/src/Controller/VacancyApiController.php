@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/api/vacancies', name: 'api_vacancy_')]
-class VacancyApiController extends AbstractController
+final class VacancyApiController extends AbstractController
 {
     public function __construct(
         private readonly VacancyService $vacancyService

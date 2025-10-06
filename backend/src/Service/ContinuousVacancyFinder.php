@@ -11,7 +11,7 @@ final readonly class ContinuousVacancyFinder
     ) {
     }
 
-    public function findContinuousVacancies(array $requiredDates): array
+    public function findContinuousVacancies(array $requiredDates): array|\InvalidArgumentException
     {
         if (empty($requiredDates)) {
             return new \InvalidArgumentException('Date range cannot be empty.');

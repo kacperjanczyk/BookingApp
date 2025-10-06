@@ -25,8 +25,8 @@ final readonly class CreateReservationDto
         #[Assert\Type(type: 'string')]
         #[Assert\Length(
             min: 2,
-            minMessage: 'Name must be at least {{ limit }} characters long.',
             max: 100,
+            minMessage: 'Name must be at least {{ limit }} characters long.',
             maxMessage: 'Name cannot be longer than {{ limit }} characters.'
         )]
         public string $name,
@@ -35,8 +35,8 @@ final readonly class CreateReservationDto
         #[Assert\Type(type: 'string')]
         #[Assert\Length(
             min: 2,
-            minMessage: 'Surname must be at least {{ limit }} characters long.',
             max: 100,
+            minMessage: 'Surname must be at least {{ limit }} characters long.',
             maxMessage: 'Surname cannot be longer than {{ limit }} characters.'
         )]
         public string $surname,
@@ -53,8 +53,8 @@ final readonly class CreateReservationDto
         #[Assert\Type(type: 'string')]
         #[Assert\Length(
             min: 5,
-            minMessage: 'Phone number must be at least {{ limit }} characters long.',
             max: 15,
+            minMessage: 'Phone number must be at least {{ limit }} characters long.',
             maxMessage: 'Phone number cannot be longer than {{ limit }} characters.'
         )]
         #[Assert\Regex(

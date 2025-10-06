@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/vacancies', name: 'admin_vacancy_')]
-class VacancyController extends AbstractController
+final class VacancyController extends AbstractController
 {
     public function __construct(
         private readonly VacancyRepository  $vacancyRepository,

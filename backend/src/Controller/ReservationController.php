@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/reservations', name: 'admin_reservations_')]
-class ReservationController extends AbstractController
+final class ReservationController extends AbstractController
 {
     public function __construct(
         private readonly ReservationRepository $reservationRepository,
